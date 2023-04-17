@@ -22,3 +22,5 @@ func main() {
 	}
 	fmt.Printf("%s", out)
 }
+
+// Generate a function that return square of a number

@@ -7,9 +7,8 @@ import (
 	"github.com/gocolly/colly"
 )
 
-var header string
+func Crawl() (string, error) {
 
-func Craw() {
 	c := colly.NewCollector()
 
 	c.OnRequest(func(r *colly.Request) {
@@ -20,16 +19,20 @@ func Craw() {
 		log.Println("Something went wrong:", err)
 	})
 
-	c.OnResponse(func(r *colly.Response) {
-		fmt.Println("Visited", r.Request.URL)
-	})
-
 	c.OnHTML("a[href]", func(e *colly.HTMLElement) {
 		e.Request.Visit(e.Attr("href"))
+		// save url
+
+		//
 	})
 
 	c.OnHTML("tr td:nth-of-type(1)", func(e *colly.HTMLElement) {
 		fmt.Println("First column of a table row:", e.Text)
+	})
+
+	// extract text in paragraph
+	c.OnHTML("p", func(e *colly.HTMLElement) {
+		fmt.Println("Paragraph:", e.Text)
 	})
 
 	c.OnXML("//h1", func(e *colly.XMLElement) {
@@ -40,5 +43,6 @@ func Craw() {
 		fmt.Println("Finished", r.Request.URL)
 	})
 
-	return "fer"
+	c.Visit("https://www.google.com")
+	return "x", nil
 }
