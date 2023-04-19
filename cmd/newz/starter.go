@@ -1,11 +1,11 @@
-package main
+package cmd
 
 import (
 	"flag"
 	"fmt"
 	"log"
 
-	"github.com/zxcfer/newz"
+	"github.com/zxcfer/newz/crawler"
 )
 
 var header string
@@ -15,8 +15,8 @@ func init() {
 	flag.Parse()
 }
 
-func main() {
-	out, err := newz.Crawl()
+func StartCrawler() {
+	out, err := crawler.Crawl()
 	if err != nil {
 		log.Fatal(err)
 	}

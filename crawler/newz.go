@@ -1,4 +1,4 @@
-package newz
+package crawler
 
 import (
 	"fmt"
